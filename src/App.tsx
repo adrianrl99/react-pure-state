@@ -48,11 +48,6 @@ interface YProps extends PureProps {}
 const yPropsAreEqual: PurePropsAreEqual<YProps> =  (prevProps, nextProps) =>
   prevProps.state?.y === nextProps.state?.y
 
-  // const updateYState: Action = async () => (state) => {
-  //   state.y = Math.random()
-  //   return state;
-  // }
-
 const actionYState: Action = (state) => {
   console.log('inside')
   state.y = Math.random()
@@ -67,9 +62,7 @@ const Y: PureFC<YProps> = memo(({ state, dispatch }) => {
   console.log("render Y", state?.y)
 
   const handleClick = async () => {
-    console.log('before change')
     await updateYState({ dispatch })
-    console.log('after change')
   }
 
   return <button onClick={handleClick}>Y</button>
@@ -133,11 +126,9 @@ const App: FC = () => {
 
   return (
     <main>
-      {console.time('time')}
       <X state={state} dispatch={dispatch} />
       <Y state={state} dispatch={dispatch} />
       <Z state={state} dispatch={dispatch} />
-      {console.timeEnd('time')}
     </main>
   )
 }
